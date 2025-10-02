@@ -5,6 +5,8 @@ This repository hosts a basic Flask web application packaged using Docker and de
 ## 🚀 Project Structure
 
 The project directory is organized to separate the core application logic, testing, containerization instructions, and CI/CD workflow.
+
+````
 .
 ├── .github/
 │   └── workflows/
@@ -15,7 +17,7 @@ The project directory is organized to separate the core application logic, testi
 ├── DockerFile                 # Instructions for building the application's Docker image.
 ├── requirements.txt           # Python dependencies (Flask, pytest, etc.).
 └── test_app.py                # Unit tests for the Flask application.
-
+````
 
 ## ⚙️ Requirements & Local Setup
 Prerequisites
