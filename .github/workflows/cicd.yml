@@ -4,7 +4,7 @@ name : CI/CD for Dockerized Flask App
 on:
   push: 
     branches : [main]
-  pull_requests: 
+  pull_request: 
     branches : [main]
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses : actions/checkout@v4
     - name : Build the docker image
-      run : docker build . --file Dockerfile --tag workflow-test:$(data +%s)
+      run : docker build . --file DockerFile --tag workflow-test:$(data +%s)
   
   build-and-test:
     runs-on: ubuntu-latest
@@ -53,13 +53,14 @@ jobs:
         password : ${{ secrets.DOCKER_PASSWORD }}
     
     - name: Build and push Docker image
+      id: docker_build_step # ADDED: Step ID
       uses : docker/build-push-action@v2
       with :
-       context :
+       context : .
        file : ./DockerFile
        push : true
        tags : ${{ secrets.DOCKER_USERNAME }}/flasktest-app:latest
 
     - name: Image Digest
-      uses : echo ${{ steps.build-and-publish.outputs.digest }}
+      uses : echo ${{ steps.docker_build_step.outputs.digest }}
       
